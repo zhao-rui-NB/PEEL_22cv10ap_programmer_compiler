@@ -1,0 +1,18 @@
+program_que.h           add auto_solve_que{i}
+global_val.h            set que_N
+                        set que_{i}_burn_type_N 
+                        set *que_{i}_burn_type[]
+
+
+lcd_menu.h              print_now_burn_type_name() add case que_{i}_burn_type[burn_type]
+                        compile() add auto_solve_que5{i}
+                        print_page_for_setup() to choose input data type
+                        lcd_page_setup() edit if optinos 1 
+
+
+
+
+
+
+
+

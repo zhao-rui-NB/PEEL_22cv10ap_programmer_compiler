@@ -11,6 +11,194 @@
 //array [0] func lsb 
 
 
+//+++ que6
+// ic 0 =>  
+// ic 1 =>  
+// ic 2 =>  
+// ic 3 =>  
+// ic 4 =>  
+// ic 5 =>  
+int auto_solve_que6(byte std_id[] , int which_ic){
+    // scan col (x5)
+    if(which_ic==0){//row
+        byte N_in = 5;
+        byte in_pin[] = {2,3,4,5,6};
+        byte N_ou = 7;
+        byte ou_pin[] = {17,18,19,20,21,22,23};
+        int table_size = 32;
+        unsigned int true_table[32];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<32 ;i++) true_table[i] = 0UL;
+        true_table[0] = get_dot_arr_col(name_and_number[0] , 0) ;
+        true_table[1] = get_dot_arr_col(name_and_number[0] , 1) ;
+        true_table[2] = get_dot_arr_col(name_and_number[0] , 2) ;
+        true_table[3] = get_dot_arr_col(name_and_number[0] , 3) ;
+        true_table[4] = get_dot_arr_col(name_and_number[0] , 4) ;
+
+        true_table[6] = get_dot_arr_col(name_and_number[1] , 0) ;
+        true_table[7] = get_dot_arr_col(name_and_number[1] , 1) ;
+        true_table[8] = get_dot_arr_col(name_and_number[1] , 2) ;
+        true_table[9] = get_dot_arr_col(name_and_number[1] , 3) ;
+        true_table[10] = get_dot_arr_col(name_and_number[1] , 4) ;
+
+        true_table[12] = get_dot_arr_col(name_and_number[2] , 0) ;
+        true_table[13] = get_dot_arr_col(name_and_number[2] , 1) ;
+        true_table[14] = get_dot_arr_col(name_and_number[2] , 2) ;
+        true_table[15] = get_dot_arr_col(name_and_number[2] , 3) ;
+        true_table[16] = get_dot_arr_col(name_and_number[2] , 4) ;
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_dect;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(7, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        return 1;
+    }
+    else if(which_ic==1){//col
+        byte N_in = 5;
+        byte in_pin[] = {2,3,4,5,6};
+        byte N_ou = 5;
+        byte ou_pin[] = {23,22,21,20,19};
+        int table_size = 32;
+        unsigned int true_table[32];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<32 ;i++) true_table[i] = 0UL;
+        true_table[0] = 0B00001 ;
+        true_table[1] = 0B00010 ;
+        true_table[2] = 0B00100 ;
+        true_table[3] = 0B01000 ;
+        true_table[4] = 0B10000 ;
+
+        true_table[6] = 0B00001 ;
+        true_table[7] = 0B00010 ;
+        true_table[8] = 0B00100 ;
+        true_table[9] = 0B01000 ;
+        true_table[10]= 0B10000 ;
+
+        true_table[12] = 0B00001 ;
+        true_table[13] = 0B00010 ;
+        true_table[14] = 0B00100 ;
+        true_table[15] = 0B01000 ;
+        true_table[16] = 0B10000 ;
+
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_dect;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        return 1;
+    }
+    //+++++ 5 bit state reg
+    //0-4 scan word 1
+    //5   dark
+    //6-10 scan 
+    //11  dark
+    //12-16
+    //17  dark
+
+    else if(which_ic==2){//state reg
+        byte N_in = 6;
+        byte in_pin[] = {23,22,21,20,19,2}; // 2 is x from div clk
+        byte N_ou = 5;
+        byte ou_pin[] = {23,22,21,20,19};
+        int table_size = 64;
+        unsigned int true_table[64];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<table_size ;i++) true_table[i] = 0UL;
+        true_table[0]  = 1 ;  true_table[0  | (1<<5)] = 1 ;
+        true_table[1]  = 2 ;  true_table[1  | (1<<5)] = 2 ;
+        true_table[2]  = 3 ;  true_table[2  | (1<<5)] = 3 ;
+        true_table[3]  = 4 ;  true_table[3  | (1<<5)] = 4 ;
+        true_table[4]  = 0 ;
+
+        true_table[6]  = 7 ;  true_table[6  | (1<<5)] = 7 ;
+        true_table[7]  = 8 ;  true_table[7  | (1<<5)] = 8 ;
+        true_table[8]  = 9 ;  true_table[8  | (1<<5)] = 9 ;
+        true_table[9]  = 10;  true_table[9  | (1<<5)] = 10 ;
+        true_table[10] = 6 ;
+
+        true_table[12] = 13 ; true_table[12 | (1<<5)] = 13 ;
+        true_table[13] = 14 ; true_table[13 | (1<<5)] = 14 ;
+        true_table[14] = 15 ; true_table[14 | (1<<5)] = 15 ;
+        true_table[15] = 16 ; true_table[15 | (1<<5)] = 16 ;
+        true_table[16] = 12 ;
+
+        //true_table[4  | (1<<5)] = 5 ;
+        //true_table[10 | (1<<5)] = 10;
+        //true_table[16 | (1<<5)] = 16 ;
+
+        //when end at this word , if x go to dark
+        true_table[4  | (1<<5)] = 5;  
+        true_table[10 | (1<<5)] = 11;
+        true_table[16 | (1<<5)] = 17; 
+
+        // if x state at dark
+        true_table[5  | (1<<5)] = 5;  
+        true_table[11 | (1<<5)] = 11;
+        true_table[17 | (1<<5)] = 17; 
+        //else , go to next word
+        true_table[5]  = 6 ;
+        true_table[11] = 12 ;
+        true_table[17] = 0 ;
+
+
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_reg;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        
+        return 1;
+    }
+    else if(which_ic==3){ //counter
+        byte N_in = 6;
+        byte in_pin[] = {23,22,21,20,19,18};
+        byte N_ou = 6;
+        byte ou_pin[] = {23,22,21,20,19,18};
+        int table_size = 64;
+        unsigned int true_table[64];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<table_size ; i++)
+            true_table[i] = i+1;
+        true_table[63] = 0 ;
+        
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_reg;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        
+        return 1;
+    }
+}//que6
+
+
+
+
+//++++ que5
     //+++++ 5 bit state reg
     //0-4 scan word 1
     //5   dark

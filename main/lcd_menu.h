@@ -68,6 +68,7 @@ void print_now_burn_type_name(){
     case 3:u8g2.print(que_3_burn_type[burn_type]);break;
     case 4:u8g2.print(que_4_burn_type[burn_type]);break;
     case 5:u8g2.print(que_5_burn_type[burn_type]);break;
+    case 6:u8g2.print(que_6_burn_type[burn_type]);break;
   }
 }
 void print_page_for_setup(){
@@ -505,6 +506,7 @@ int compile(){
     case 3:return auto_solve_que3(std_id , burn_type);
     case 4:return auto_solve_que4(std_id , burn_type);
     case 5:return auto_solve_que5(std_id , burn_type);
+    case 6:return auto_solve_que6(std_id , burn_type);
     default:return 0; 
   }
   return 1;}
