@@ -12,7 +12,7 @@ main.ino <== global_val.h
 
 void setup(){
     delay(1000);
-    Serial.begin(250000);
+    Serial.begin(115200);
     u8g2.begin();
     u8g2.enableUTF8Print();		
     digitalWrite(BTN_L  , 1);
@@ -22,7 +22,7 @@ void setup(){
     digitalWrite(BTN_U  , 1);
     pinMode(BUZZ   , 1);
     
-    wdt_enable(WDTO_8S);
+    //wdt_enable(WDTO_8S);
 }
 void loop(){
     lcd_page_setup();//setting menu , que,mode,ok,stid,name

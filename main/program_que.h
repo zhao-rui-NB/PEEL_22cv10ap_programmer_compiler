@@ -21,95 +21,6 @@
 int auto_solve_que6(byte std_id[] , int which_ic){
     // scan col (x5)
     if(which_ic==0){//row L
-        byte N_in = 6;
-        byte in_pin[] = {2,3,4,5,6,7,8};
-        byte N_ou = 7;
-        byte ou_pin[] = {17,18,19,20,21,22,23};
-        int table_size = 64;
-        unsigned int true_table[64];
-        int dont_care_size = 0;
-        unsigned long dont_care[] = {};   
-        
-        for(int i=0 ; i<64 ;i++) true_table[i] = 0UL;
-        true_table[0]   = 0;
-        true_table[1]   = 0;
-        true_table[2]   = 0;
-        true_table[3]   = 0;
-        true_table[4]   = 0;
-        true_table[5]   = get_dot_arr_col(name_and_number[0] , 0);
-        true_table[6]   = get_dot_arr_col(name_and_number[0] , 1);
-        true_table[7]   = get_dot_arr_col(name_and_number[0] , 2);
-        true_table[8]   = get_dot_arr_col(name_and_number[0] , 3);
-        true_table[9]   = get_dot_arr_col(name_and_number[0] , 4);
-        
-        true_table[0 + 10]  =  get_dot_arr_col(name_and_number[0] , 0);
-        true_table[1 + 10]  =  get_dot_arr_col(name_and_number[0] , 1);
-        true_table[2 + 10]  =  get_dot_arr_col(name_and_number[0] , 2);
-        true_table[3 + 10]  =  get_dot_arr_col(name_and_number[0] , 3);
-        true_table[4 + 10]  =  get_dot_arr_col(name_and_number[0] , 4);
-        true_table[5 + 10]  =  get_dot_arr_col(name_and_number[1] , 0);
-        true_table[6 + 10]  =  get_dot_arr_col(name_and_number[1] , 1);
-        true_table[7 + 10]  =  get_dot_arr_col(name_and_number[1] , 2);
-        true_table[8 + 10]  =  get_dot_arr_col(name_and_number[1] , 3);
-        true_table[9 + 10]  =  get_dot_arr_col(name_and_number[1] , 4);
-
-        true_table[0 + 20]  =  get_dot_arr_col(name_and_number[1] , 0);
-        true_table[1 + 20]  =  get_dot_arr_col(name_and_number[1] , 1);
-        true_table[2 + 20]  =  get_dot_arr_col(name_and_number[1] , 2);
-        true_table[3 + 20]  =  get_dot_arr_col(name_and_number[1] , 3);
-        true_table[4 + 20]  =  get_dot_arr_col(name_and_number[1] , 4);
-        true_table[5 + 20]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[6 + 20]  =  get_dot_arr_col(name_and_number[2] , 1);
-        true_table[7 + 20]  =  get_dot_arr_col(name_and_number[2] , 2);
-        true_table[8 + 20]  =  get_dot_arr_col(name_and_number[2] , 3);
-        true_table[9 + 20]  =  get_dot_arr_col(name_and_number[2] , 4);
-
-        true_table[0 + 30]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[1 + 30]  =  get_dot_arr_col(name_and_number[2] , 1);
-        true_table[2 + 30]  =  get_dot_arr_col(name_and_number[2] , 2);
-        true_table[3 + 30]  =  get_dot_arr_col(name_and_number[2] , 3);
-        true_table[4 + 30]  =  get_dot_arr_col(name_and_number[2] , 4);
-        true_table[5 + 30]  =  0;
-        true_table[6 + 30]  =  0;
-        true_table[7 + 30]  =  0;
-        true_table[8 + 30]  =  0;
-        true_table[9 + 30]  =  0;
-
-        true_table[0 + 40]  =  0;
-        true_table[1 + 40]  =  0;
-        true_table[2 + 40]  =  0;
-        true_table[3 + 40]  =  0;
-        true_table[4 + 40]  =  0;
-        true_table[5 + 40]  =  0;
-        true_table[6 + 40]  =  0;
-        true_table[7 + 40]  =  0;
-        true_table[8 + 40]  =  0;
-        true_table[9 + 40]  =  0;
-
-        true_table[0 + 50]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[1 + 50]  =  get_dot_arr_col(name_and_number[2] , 1);
-        true_table[2 + 50]  =  get_dot_arr_col(name_and_number[2] , 2);
-        true_table[3 + 50]  =  get_dot_arr_col(name_and_number[2] , 3);
-        true_table[4 + 50]  =  get_dot_arr_col(name_and_number[2] , 4);
-        true_table[5 + 50]  =  0;
-        true_table[6 + 50]  =  0;
-        true_table[7 + 50]  =  0;
-        true_table[8 + 50]  =  0;
-        true_table[9 + 50]  =  0;
-
-        
-        all_output_NOT = 0;
-        ALL_MC_cfg = MC_cfg_dect;
-        jed_array_init();
-        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
-        assign_pin(7, ou_pin ,cnt_ou_orang_use_and_term);
-        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
-        if(re<0)return 0;
-        disable_not_use_term();
-        print_jed();
-        return 1;
-    }
-    if(which_ic==1){//row L
         byte N_in = 7;
         byte in_pin[] = {2,3,4,5,6,7,8};
         byte N_ou = 7;
@@ -120,89 +31,237 @@ int auto_solve_que6(byte std_id[] , int which_ic){
         unsigned long dont_care[] = {};   
         
         for(int i=0 ; i<128 ;i++) true_table[i] = 0UL;
+        //img 0
         true_table[0]   = 0;
         true_table[1]   = 0;
         true_table[2]   = 0;
         true_table[3]   = 0;
         true_table[4]   = 0;
-        true_table[5]   = 0;
-        true_table[6]   = 0;
-        true_table[7]   = 0;
-        true_table[8]   = 0;
-        true_table[9]   = 0;
-        
-        true_table[0 + (1<<4)]  =  0;
-        true_table[1 + (1<<4)]  =  0;
-        true_table[2 + (1<<4)]  =  0;
-        true_table[3 + (1<<4)]  =  0;
-        true_table[4 + (1<<4)]  =  0;
-        true_table[5 + (1<<4)]  =  0;
-        true_table[6 + (1<<4)]  =  0;
-        true_table[7 + (1<<4)]  =  0;
-        true_table[8 + (1<<4)]  =  0;
-        true_table[9 + (1<<4)]  =  0;
-
-        true_table[0 + (2<<4)]  =  0;
-        true_table[1 + (2<<4)]  =  0;
-        true_table[2 + (2<<4)]  =  0;
-        true_table[3 + (2<<4)]  =  0;
-        true_table[4 + (2<<4)]  =  0;
-        true_table[5 + (2<<4)]  =  0;
-        true_table[6 + (2<<4)]  =  0;
-        true_table[7 + (2<<4)]  =  0;
-        true_table[8 + (2<<4)]  =  0;
-        true_table[9 + (2<<4)]  =  0;
-
-        true_table[0 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
-        true_table[1 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
-        true_table[2 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
-        true_table[3 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
-        true_table[4 + (3<<4)]  =  0;
-        true_table[5 + (3<<4)]  =  0;
-        true_table[6 + (3<<4)]  =  0;
-        true_table[7 + (3<<4)]  =  0;
-        true_table[8 + (3<<4)]  =  0;
-        true_table[9 + (3<<4)]  =  0;
-
+        //img 1
+        true_table[0 + (1<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
+        true_table[1 + (1<<4)]  =  get_dot_arr_col(name_and_number[0] , 1);
+        true_table[2 + (1<<4)]  =  get_dot_arr_col(name_and_number[0] , 2);
+        true_table[3 + (1<<4)]  =  get_dot_arr_col(name_and_number[0] , 3);
+        true_table[4 + (1<<4)]  =  get_dot_arr_col(name_and_number[0] , 4);
+        //img 2
+        true_table[0 + (2<<4)]  =  get_dot_arr_col(name_and_number[1] , 0);
+        true_table[1 + (2<<4)]  =  get_dot_arr_col(name_and_number[1] , 1);
+        true_table[2 + (2<<4)]  =  get_dot_arr_col(name_and_number[1] , 2);
+        true_table[3 + (2<<4)]  =  get_dot_arr_col(name_and_number[1] , 3);
+        true_table[4 + (2<<4)]  =  get_dot_arr_col(name_and_number[1] , 4);
+        //img 3
+        true_table[0 + (3<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
+        true_table[1 + (3<<4)]  =  get_dot_arr_col(name_and_number[2] , 1);
+        true_table[2 + (3<<4)]  =  get_dot_arr_col(name_and_number[2] , 2);
+        true_table[3 + (3<<4)]  =  get_dot_arr_col(name_and_number[2] , 3);
+        true_table[4 + (3<<4)]  =  get_dot_arr_col(name_and_number[2] , 4);
+        //img 4
         true_table[0 + (4<<4)]  =  0;
         true_table[1 + (4<<4)]  =  0;
         true_table[2 + (4<<4)]  =  0;
         true_table[3 + (4<<4)]  =  0;
         true_table[4 + (4<<4)]  =  0;
-        true_table[5 + (4<<4)]  =  0;
-        true_table[6 + (4<<4)]  =  0;
-        true_table[7 + (4<<4)]  =  0;
-        true_table[8 + (4<<4)]  =  0;
-        true_table[9 + (4<<4)]  =  0;
-
+        //img 5
         true_table[0 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[1 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[2 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[3 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
-        true_table[4 + (5<<4)]  =  0;
-        true_table[5 + (5<<4)]  =  0;
-        true_table[6 + (5<<4)]  =  0;
-        true_table[7 + (5<<4)]  =  0;
-        true_table[8 + (5<<4)]  =  0;
-        true_table[9 + (5<<4)]  =  0;
+        true_table[1 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 1);
+        true_table[2 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 2);
+        true_table[3 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 3);
+        true_table[4 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 4);
 
-        
         all_output_NOT = 0;
         ALL_MC_cfg = MC_cfg_dect;
         jed_array_init();
         count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
-        assign_pin(7, ou_pin ,cnt_ou_orang_use_and_term);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
         int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
         if(re<0)return 0;
         disable_not_use_term();
         print_jed();
         return 1;
     }
-    else if(which_ic==2){//col , low 0-7
+    if(which_ic==1){//row 01
+        byte N_in = 7;
+        byte in_pin[] = {2,3,4,5,6,7,8};
+        byte N_ou = 7;
+        byte ou_pin[] = {17,18,19,20,21,22,23};
+        int table_size = 128;
+        unsigned int true_table[128];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<128 ;i++) true_table[i] = 0UL;
+        //img 0
+        true_table[5]           =  get_dot_arr_col(name_and_number[0] , 0);
+        true_table[6]           =  get_dot_arr_col(name_and_number[0] , 1);
+        true_table[7]           =  get_dot_arr_col(name_and_number[0] , 2);
+        true_table[8]           =  get_dot_arr_col(name_and_number[0] , 3);
+        true_table[9]           =  get_dot_arr_col(name_and_number[0] , 4);
+        //img 1 
+        true_table[5 + (1<<4)]  =  get_dot_arr_col(name_and_number[1] , 0);
+        true_table[6 + (1<<4)]  =  get_dot_arr_col(name_and_number[1] , 1);
+        true_table[7 + (1<<4)]  =  get_dot_arr_col(name_and_number[1] , 2);
+        true_table[8 + (1<<4)]  =  get_dot_arr_col(name_and_number[1] , 3);
+        true_table[9 + (1<<4)]  =  get_dot_arr_col(name_and_number[1] , 4);
+        //img 2
+        true_table[5 + (2<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
+        true_table[6 + (2<<4)]  =  get_dot_arr_col(name_and_number[2] , 1);
+        true_table[7 + (2<<4)]  =  get_dot_arr_col(name_and_number[2] , 2);
+        true_table[8 + (2<<4)]  =  get_dot_arr_col(name_and_number[2] , 3);
+        true_table[9 + (2<<4)]  =  get_dot_arr_col(name_and_number[2] , 4);
+        //img 3
+        true_table[5 + (3<<4)]  =  0;
+        true_table[6 + (3<<4)]  =  0;
+        true_table[7 + (3<<4)]  =  0;
+        true_table[8 + (3<<4)]  =  0;
+        true_table[9 + (3<<4)]  =  0;
+        //img 4
+        true_table[5 + (4<<4)]  =  0;
+        true_table[6 + (4<<4)]  =  0;
+        true_table[7 + (4<<4)]  =  0;
+        true_table[8 + (4<<4)]  =  0;
+        true_table[9 + (4<<4)]  =  0;
+        //img 5
+        true_table[5 + (5<<4)]  =  0;
+        true_table[6 + (5<<4)]  =  0;
+        true_table[7 + (5<<4)]  =  0;
+        true_table[8 + (5<<4)]  =  0;
+        true_table[9 + (5<<4)]  =  0;
+
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_dect;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        return 1;
+    }
+    if(which_ic==2){//row 10
+        byte N_in = 7;
+        byte in_pin[] = {2,3,4,5,6,7,8};
+        byte N_ou = 7;
+        byte ou_pin[] = {17,18,19,20,21,22,23};
+        int table_size = 128;
+        unsigned int true_table[128];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<128 ;i++) true_table[i] = 0UL;
+        //img 0
+        true_table[0]           =  0;
+        true_table[1]           =  0;
+        true_table[2]           =  0;
+        true_table[3]           =  0;
+        true_table[4]           =  0;
+        //img 1
+        true_table[0 + (1<<4)]  =  0;
+        true_table[1 + (1<<4)]  =  0;
+        true_table[2 + (1<<4)]  =  0;
+        true_table[3 + (1<<4)]  =  0;
+        true_table[4 + (1<<4)]  =  0;
+        //img 2
+        true_table[0 + (2<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
+        true_table[1 + (2<<4)]  =  get_dot_arr_col(name_and_number[0] , 1);
+        true_table[2 + (2<<4)]  =  get_dot_arr_col(name_and_number[0] , 2);
+        true_table[3 + (2<<4)]  =  get_dot_arr_col(name_and_number[0] , 3);
+        true_table[4 + (2<<4)]  =  get_dot_arr_col(name_and_number[0] , 4);
+        //img 3
+        true_table[0 + (3<<4)]  =  get_dot_arr_col(name_and_number[1] , 0);
+        true_table[1 + (3<<4)]  =  get_dot_arr_col(name_and_number[1] , 1);
+        true_table[2 + (3<<4)]  =  get_dot_arr_col(name_and_number[1] , 2);
+        true_table[3 + (3<<4)]  =  get_dot_arr_col(name_and_number[1] , 3);
+        true_table[4 + (3<<4)]  =  get_dot_arr_col(name_and_number[1] , 4);
+        //img 4
+        true_table[0 + (4<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
+        true_table[1 + (4<<4)]  =  get_dot_arr_col(name_and_number[2] , 1);
+        true_table[2 + (4<<4)]  =  get_dot_arr_col(name_and_number[2] , 2);
+        true_table[3 + (4<<4)]  =  get_dot_arr_col(name_and_number[2] , 3);
+        true_table[4 + (4<<4)]  =  get_dot_arr_col(name_and_number[2] , 4);
+        //img 5
+        true_table[0 + (5<<4)]  =  0;
+        true_table[1 + (5<<4)]  =  0;
+        true_table[2 + (5<<4)]  =  0;
+        true_table[3 + (5<<4)]  =  0;
+        true_table[4 + (5<<4)]  =  0;
+
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_dect;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        return 1;
+    }
+    if(which_ic==3){//row 11
+        byte N_in = 7;
+        byte in_pin[] = {2,3,4,5,6,7,8};
+        byte N_ou = 7;
+        byte ou_pin[] = {17,18,19,20,21,22,23};
+        int table_size = 128;
+        unsigned int true_table[128];
+        int dont_care_size = 0;
+        unsigned long dont_care[] = {};   
+        
+        for(int i=0 ; i<128 ;i++) true_table[i] = 0UL;
+        //img 0
+        true_table[5]           =  0;
+        true_table[6]           =  0;
+        true_table[7]           =  0;
+        true_table[8]           =  0;
+        true_table[9]           =  0;
+        //img 1 
+        true_table[5 + (1<<4)]  =  0;
+        true_table[6 + (1<<4)]  =  0;
+        true_table[7 + (1<<4)]  =  0;
+        true_table[8 + (1<<4)]  =  0;
+        true_table[9 + (1<<4)]  =  0;
+        //img 2
+        true_table[5 + (2<<4)]  =  0;
+        true_table[6 + (2<<4)]  =  0;
+        true_table[7 + (2<<4)]  =  0;
+        true_table[8 + (2<<4)]  =  0;
+        true_table[9 + (2<<4)]  =  0;
+        //img 3
+        true_table[5 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 0);
+        true_table[6 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 1);
+        true_table[7 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 2);
+        true_table[8 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 3);
+        true_table[9 + (3<<4)]  =  get_dot_arr_col(name_and_number[0] , 4);
+        //img 4
+        true_table[5 + (4<<4)]  =  get_dot_arr_col(name_and_number[1] , 0);
+        true_table[6 + (4<<4)]  =  get_dot_arr_col(name_and_number[1] , 1);
+        true_table[7 + (4<<4)]  =  get_dot_arr_col(name_and_number[1] , 2);
+        true_table[8 + (4<<4)]  =  get_dot_arr_col(name_and_number[1] , 3);
+        true_table[9 + (4<<4)]  =  get_dot_arr_col(name_and_number[1] , 4);
+        //img 5
+        true_table[5 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 0);
+        true_table[6 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 1);
+        true_table[7 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 2);
+        true_table[8 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 3);
+        true_table[9 + (5<<4)]  =  get_dot_arr_col(name_and_number[2] , 4);
+
+        all_output_NOT = 0;
+        ALL_MC_cfg = MC_cfg_dect;
+        jed_array_init();
+        count_hm_must_use_and_term_for_each_pin(N_in, in_pin, N_ou, ou_pin, table_size,true_table, dont_care_size,dont_care);
+        assign_pin(N_ou, ou_pin ,cnt_ou_orang_use_and_term);
+        int re = convert_to_JED(N_in, in_pin, N_ou, final_ou_pin_order, table_size,true_table , dont_care_size,dont_care);
+        if(re<0)return 0;
+        disable_not_use_term();
+        print_jed();
+        return 1;
+    }
+    
+    else if(which_ic==4){//col ,
         byte N_in = 4;
         byte in_pin[] = {2,3,4,5};
-        byte N_ou = 8;
-        byte ou_pin[] = {23,22,21,20,19,18,17,16,15};
+        byte N_ou = 10;
+        byte ou_pin[] = {23,22,21,20,19,18,17,16,15,14};
         int table_size = 16;
         unsigned int true_table[16];
         int dont_care_size = 0;
@@ -245,7 +304,7 @@ int auto_solve_que6(byte std_id[] , int which_ic){
     //12-16
     //17  dark
 
-    else if(which_ic==2){//state reg
+    else if(which_ic==3){//state reg
         byte N_in = 6;
         byte in_pin[] = {23,22,21,20,19,2}; // 2 is x from div clk
         byte N_ou = 5;
@@ -305,7 +364,7 @@ int auto_solve_que6(byte std_id[] , int which_ic){
         
         return 1;
     }
-    else if(which_ic==3){ //counter
+    else if(which_ic==4){ //counter
         byte N_in = 6;
         byte in_pin[] = {23,22,21,20,19,18};
         byte N_ou = 6;
