@@ -81,7 +81,7 @@ void print_page_for_setup(){
   u8g2.print("選擇題目:   ");
   u8g2.print(que_num);
   
-  if(que_num==4 || que_num==5 ){ // Z37
+  if(que_num==4 || que_num==5 ||que_num==6){ // Z37
     u8g2.setCursor(0, lcd_L2_D);
     u8g2.print("姓氏學號: ");
     u8g2.print(char(name_and_number[0]));
@@ -162,7 +162,7 @@ void lcd_page_setup(){
             }
           }
         }
-        else if(optinos==1 && (que_num==4||que_num==5)){//input std id  //add name and end 2 stid 
+        else if(optinos==1 && (que_num==4||que_num==5 || que_num==6)){//input std id  //add name and end 2 stid 
           byte sel_bit = 0;  //  0-2   (name ten one) , (char , int , int) 
           print_page_for_setup();
           u8g2.setDrawColor(2);
@@ -306,6 +306,7 @@ void lcd_page_setup(){
             case 3:mode_N=que_3_burn_type_N; break;
             case 4:mode_N=que_4_burn_type_N; break;
             case 5:mode_N=que_5_burn_type_N; break;
+            case 6:mode_N=que_6_burn_type_N; break;
           }
           print_page_for_setup();
           u8g2.setDrawColor(2);
